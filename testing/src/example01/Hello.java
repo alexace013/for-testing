@@ -1,3 +1,5 @@
+package example01;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,7 +19,7 @@ public class Hello {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Hello, " + name);
+        System.out.println("example01.Hello, " + name);
 
     }
 
