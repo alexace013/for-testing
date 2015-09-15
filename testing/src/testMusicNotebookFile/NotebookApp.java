@@ -1,6 +1,7 @@
 package testMusicNotebookFile;
 
 import java.util.Iterator;
+import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -20,6 +21,9 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class NotebookApp extends Application {
+
+	private static StringBuilder stringBuilder = new StringBuilder();
+	private static Notebook notebook = new Notebook();
 
 	public static void main(String[] args) {
 		launch(args);
@@ -87,7 +91,7 @@ public class NotebookApp extends Application {
 		textArea.setEditable(false);
 		gridPane.add(textArea, 1, 5);
 
-		Notebook notebook = new Notebook();
+//		Notebook notebook = new Notebook();
 
 		buttonSave.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -110,7 +114,7 @@ public class NotebookApp extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				textArea.setText("");
-				StringBuilder stringBuilder = new StringBuilder();
+//				StringBuilder stringBuilder = new StringBuilder();
 				stringBuilder.append(notebook.allTracks().toString());
 				Iterator<TrackRegister> iterator = notebook.allTracks()
 						.iterator();
@@ -147,4 +151,80 @@ public class NotebookApp extends Application {
 
 		stage.show();
 	}
+
+	public String getText() {
+
+		String str = String.valueOf(stringBuilder.append(notebook.allTracks().toString()));
+		return str;
+
+	}
+
+	public class QuestionWindowApp extends Application {
+
+		public void main(String[] args) {
+			launch(args);
+		}
+
+		@Override
+		public void start(Stage stage) throws Exception {
+
+			stage.setTitle("question");
+
+			GridPane gridPane = new GridPane();
+			gridPane.setAlignment(Pos.TOP_CENTER);
+			gridPane.setHgap(10.0d);
+			gridPane.setVgap(10.0d);
+			gridPane.setPadding(new Insets(25, 25, 25, 25));
+
+			Text textQuestion = new Text("Do you want to write your data to a file?");
+			textQuestion.setFont(Font.font("Tahoma", FontWeight.NORMAL, 12));
+			gridPane.add(textQuestion, 0, 0);
+
+			HBox box = new HBox(10.0d);
+			box.setAlignment(Pos.CENTER);
+			Button buttonYes = new Button("yes");
+			buttonYes.setFont(Font.font("Tahoma", FontWeight.NORMAL, 12));
+			buttonYes.setPrefSize(40, 20);
+			box.getChildren().add(buttonYes);
+			Button buttonNo = new Button("no");
+			buttonNo.setFont(Font.font("Tahoma", FontWeight.NORMAL, 12));
+			buttonNo.setPrefSize(40, 20);
+			box.getChildren().add(buttonNo);
+
+			gridPane.add(box, 0, 1);
+
+			buttonYes.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent event) {
+					System.out.print("enter file name: ");
+					Scanner scanner = new Scanner(System.in);
+					String fileName = scanner.nextLine();
+					FileProcess fileProcess = new FileProcess();
+					fileProcess.writeFile(fileName, NotebookApp.notebook.allTracks().toString());
+					stage.close();
+				}
+			});
+
+			buttonNo.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent event) {
+					stage.close();
+				}
+			});
+
+
+
+			Scene scene = new Scene(gridPane, 300, 100);
+			stage.setScene(scene);
+
+			stage.show();
+
+		}
+
+
+
+	}
+
 }

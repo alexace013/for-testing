@@ -16,7 +16,7 @@ public class Task01 {
         System.out.print("Введите дробное число: ");
         double value = scanner.nextDouble();
         method1(value);
-        method2(value);
+//        method2(value);
 
     }
 
