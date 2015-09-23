@@ -15,7 +15,7 @@ public class OracleJDBC2 {
 
         try {
 
-            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Class.forName("java.sql.Driver");
 
         } catch (ClassNotFoundException e) {
 
@@ -31,9 +31,10 @@ public class OracleJDBC2 {
 
         try {
 
-            connection = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:xe", "admin",
-                    "admin");
+//            connection = DriverManager.getConnection(
+//                    "jdbc:oracle:thin:@localhost:1521:xe", "hr",
+//                    "hr");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr");
 
         } catch (SQLException e) {
 

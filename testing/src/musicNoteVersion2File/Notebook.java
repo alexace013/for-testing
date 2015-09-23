@@ -13,14 +13,13 @@ import java.util.Map;
 public class Notebook {
 
     private Map<Long, TrackRegister> registers = new HashMap<Long, TrackRegister>();
-    private long nextId;
+    private long nextId = 0;
     private boolean trackAdd = false;
 
     private long getNextId() {
         if (nextId < Long.MAX_VALUE && !registers.containsKey(nextId)) {
             return nextId++;
         }
-        nextId = 0;
         while (nextId < Long.MAX_VALUE) {
             if (!registers.containsKey(nextId)) {
                 return nextId;
@@ -35,9 +34,9 @@ public class Notebook {
         long registerId = getNextId();
         TrackRegister register = new TrackRegister(registerId, author, genre,
                 track);
-        registers.put(registerId, register);
-        trackAdd = true;
-        return (TrackRegister) register.clone();
+            registers.put(registerId, register);
+            trackAdd = true;
+        return (TrackRegister) register;
     }
 
     public TrackRegister getTrack(long id) throws CloneNotSupportedException {
@@ -72,4 +71,5 @@ public class Notebook {
         }
         return new String("track is not saved.");
     }
+
 }

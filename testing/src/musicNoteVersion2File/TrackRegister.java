@@ -48,14 +48,25 @@ public class TrackRegister implements Serializable, Cloneable {
         return true;
     }
 
+//    @Override
+//    public int hashCode() {
+//        int hash = 7;
+//        hash = 61 * hash + (int) (this.ID ^ (this.ID >>> 32));
+//        hash = 61 * hash + (this.track != null ? this.track.hashCode() : 0);
+//        hash = 61 * hash + (this.author != null ? this.author.hashCode() : 0);
+//        hash = 61 * hash + (this.genre != null ? this.genre.hashCode() : 0);
+//        return hash;
+//    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 61 * hash + (int) (this.ID ^ (this.ID >>> 32));
-        hash = 61 * hash + (this.track != null ? this.track.hashCode() : 0);
-        hash = 61 * hash + (this.author != null ? this.author.hashCode() : 0);
-        hash = 61 * hash + (this.genre != null ? this.genre.hashCode() : 0);
-        return hash;
+
+        int result = 37;
+        result = 31 * result + this.author.hashCode();
+        result = 31 * result + this.genre.hashCode();
+        result = 31 * result + this.track.hashCode();
+        return result;
+
     }
 
     @Override
