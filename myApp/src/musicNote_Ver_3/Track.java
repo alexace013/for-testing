@@ -1,7 +1,5 @@
 package musicNote_Ver_3;
 
-import java.util.ArrayList;
-
 /*
    * @info  Class responsible for the registration of a musical track.
    *        Use : artist name , genre, artist and track title.

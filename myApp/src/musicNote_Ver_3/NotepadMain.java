@@ -26,8 +26,6 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import musicNoteVersion2File.FileProcess;
-
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.Iterator;
