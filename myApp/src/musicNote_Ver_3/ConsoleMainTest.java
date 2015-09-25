@@ -3,7 +3,7 @@ package musicNote_Ver_3;
 /**
  * Created by alexander on 23.09.15.
  */
-public class ConsoleMain {
+public class ConsoleMainTest {
 
     public static void main(String[] args) {
 

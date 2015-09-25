@@ -77,7 +77,7 @@ public class NotepadMain extends Application {
         mainGridPain.add(textAuthorGenre, 0, 1);
 
         // текст "название композиции"
-        Text textTrackTitle = new Text(strAuthorGenre.substring(6, strAuthorGenre.length()) + ": ");
+        Text textTrackTitle = new Text(strTrackTitle.substring(6, strTrackTitle.length()) + ": ");
         textTrackTitle.setFont(Font.font("Arial", FontWeight.BOLD, 12));
         mainGridPain.add(textTrackTitle, 0, 2);
 
@@ -484,7 +484,7 @@ public class NotepadMain extends Application {
                             count++;
                         }
                         fileWriteProcess.writeFile(fileName, stringBuilder1.toString() +
-                                "\ndate: " + dateTime);
+                                "\ndate: " + "\t" + dateTime + "\n");
                         stage.close();
                     }
                 });
