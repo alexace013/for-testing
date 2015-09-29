@@ -22,7 +22,7 @@ public class FileProcess {
             fileWriter = new FileWriter(file2, true);
             if(file.exists()) {
                 try {
-                    fileWriter.write("\n" + text);
+                    fileWriter.write(text);
                 } finally {
                     fileWriter.close();
                 }

@@ -8,9 +8,9 @@ public class ConsoleMainTest {
     public static void main(String[] args) {
 
         Notepad notepad = new Notepad();
-        notepad.addTrack("Red Hot Chili Peppers", "funk", "Taste the Pain");
-        notepad.addTrack("Die Antwoord", "zef", "Pitbull Terrier");
-        notepad.addTrack("Kasabian", "indie rock", "Cutt Off");
+        notepad.addTrack("one", "one", "one");
+        notepad.addTrack("two", "two", "two");
+        notepad.addTrack("two", "two", "two");
         System.out.println(notepad.getAllTracks());
         notepad.removeTrack(2);
         notepad.removeTrack(1);

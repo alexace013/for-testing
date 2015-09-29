@@ -5,7 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * Created by alexander on 25.09.15.
+ * @info class is responsible for the process of saving data to a file.
+ *
+ * @author alexander on 13.09.15.
  */
 public class FileWriteProcess {
 

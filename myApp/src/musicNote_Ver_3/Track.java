@@ -1,15 +1,15 @@
 package musicNote_Ver_3;
 
 /*
-   * @info  Class responsible for the registration of a musical track.
+   * @info  class responsible for the registration of a musical track.
    *        Use : artist name , genre, artist and track title.
    *
-   * Created by Alexander Bakhin on 23.09.15.
+   * @author Alexander Bakhin on 23.09.15.
    * */
 public class Track {
 
     private String artistName;  // имя исполнителя
-    private String trackGenre;  // жанр исполнтеля
+    private String trackGenre;  // жанр исполнителя
     private String trackTitle;   // название песни исполнителя
 
     public Track(String artistName, String trackGenre, String trackTitle) {

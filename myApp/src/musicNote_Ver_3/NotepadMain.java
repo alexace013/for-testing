@@ -34,7 +34,7 @@ import java.util.regex.Pattern;
 
 public class NotepadMain extends Application {
 
-    // строчки котрые часто используются в процессе
+    // строчки которые часто используются в процессе
     private final static String strEmpty = new String("");
     private final static String strAuthorName = new String("enter author name");
     private final static String strAuthorGenre = new String("enter author genre");
@@ -145,7 +145,7 @@ public class NotepadMain extends Application {
         // создание HBox для размещения дополнительных кнопок
         HBox hBox2 = new HBox();
 
-        // создание кнопки"удалить компонет по индексу"
+        // создание кнопки "удалить компонет по индексу"
         Button buttonDelete = new Button("delete");
         buttonDelete.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 12));
         buttonDelete.setPrefSize(70, 20);

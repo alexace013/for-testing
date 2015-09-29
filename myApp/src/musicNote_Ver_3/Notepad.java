@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Created by alexander on 23.09.15.
+ * @info class is responsible for the logic
+ *       operation while the notebook.
+ *
+ * @author alexander on 23.09.15.
  */
 public class Notepad implements Registration {
 
