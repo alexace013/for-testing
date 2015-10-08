@@ -1,6 +1,6 @@
 package calcFigure.figure;
 
-import calcFigure.figureIntrc.FigureParam;
+import calcFigure.figureImpl.FigureParam;
 
 /**
  * Created by alexander on 07.10.15.
@@ -11,7 +11,7 @@ public class Box implements FigureParam {
     private double width;
     private double depth;
 
-    private Box() {
+    public Box() {
         height = 0.0d;
         width = 0.0d;
         depth = 0.0d;
