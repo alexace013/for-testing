@@ -58,7 +58,7 @@ public class Box implements FigureParam {
     }
 
     public double getVolume() {
-        double result = getHeight() + getWidth() + getDepth();
+        double result = getHeight() * getWidth() * getDepth();
         return result;
     }
 

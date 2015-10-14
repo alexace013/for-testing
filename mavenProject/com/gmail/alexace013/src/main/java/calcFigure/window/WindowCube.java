@@ -1,7 +1,7 @@
 package calcFigure.window;
 
 import calcFigure.CalcFigureMainFX;
-import calcFigure.figure.Box;
+import calcFigure.figure.Cube;
 import calcFigure.inputNumber.InputConstrains;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -21,79 +21,42 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * Created by alexander on 08.10.15.
+ * Created by alexander on 14.10.15.
  */
-public class WindowBox extends Application {
+public class WindowCube extends Application {
 
-    private Box box = new Box();
+    private Cube cube = new Cube();
 
     @Override
     public void start(Stage stage) throws Exception {
 
-        stage.setTitle("Box");
+        stage.setTitle("Cube");
 
-        // create GridPane
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.TOP_CENTER);
         gridPane.setHgap(10.0d);
         gridPane.setVgap(10.0d);
         gridPane.setPadding(new Insets(10.0d, 10.0d, 10.0d, 10.0d));
 
-        // create Text - text height
-        Text textHeight = new Text("enter box height: ");
-        textHeight.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
+        Text text = new Text("enter cube side: ");
+        text.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
+        gridPane.add(text, 0, 0);
 
-        // create Text - text width
-        Text textWidth = new Text("enter box width: ");
-        textWidth.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
+        TextField textField = new TextField();
+        textField.setMaxSize(140, 20);
+        textField.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
+        InputConstrains.numbersOnly(textField);
 
-        // create Text - text depth
-        Text textDepth = new Text("enter box depth: ");
-        textDepth.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
+        gridPane.add(textField, 1, 0);
 
-        // add text elements in gridPane
-        gridPane.add(textHeight, 0, 0);
-        gridPane.add(textWidth, 0, 1);
-        gridPane.add(textDepth, 0, 2);
-
-        // create TextField - height
-        TextField textFieldHeight = new TextField();
-        textFieldHeight.setMaxSize(140, 20);
-        textFieldHeight.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
-        InputConstrains.numbersOnly(textFieldHeight);
-
-        // create TextField - width
-        TextField textFieldWidth = new TextField();
-        textFieldWidth.setMaxSize(140, 20);
-        textFieldWidth.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
-        InputConstrains.numbersOnly(textFieldWidth);
-
-        // create TextField - depth
-        TextField textFieldDepth = new TextField();
-        textFieldDepth.setMaxSize(140, 20);
-        textDepth.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
-        InputConstrains.numbersOnly(textFieldDepth);
-
-        //add textField elements in gridPane
-        gridPane.add(textFieldHeight, 1, 0);
-        gridPane.add(textFieldWidth, 1, 1);
-        gridPane.add(textFieldDepth, 1, 2);
-
-        // create TextArea
         TextArea textArea = new TextArea();
         textArea.setFont(Font.font("Arial", FontWeight.BOLD, 11));
-        /*
-        * sedEditable
-        * true = > editing possible
-        * false = > editing is not possible
-        * */
         textArea.setEditable(false);
         textArea.setBackground(Background.EMPTY);
         textArea.setMaxSize(180, 20);
-        // add textArea in gridPane
+
         gridPane.add(textArea, 1, 4);
 
-        // create HBox for accommodation buttons
         HBox hBox = new HBox(7.5d);
         hBox.setAlignment(Pos.CENTER);
 
@@ -114,25 +77,17 @@ public class WindowBox extends Application {
         // add hBox in gridPane
         gridPane.add(hBox, 1, 3);
 
-        // actions that will be processed by pressing the button "CALCULATE"
         buttonCalc.setOnAction(new EventHandler<ActionEvent>() {
-
             @Override
             public void handle(ActionEvent event) {
-
-                box.setHeight(Double.parseDouble(textFieldHeight.getText()));
-                box.setWidth(Double.parseDouble(textFieldWidth.getText()));
-                box.setDepth(Double.parseDouble(textFieldDepth.getText()));
-                textArea.setText("box volume = " + String.valueOf(box.getVolume()));
-
+                cube.setHeight(Double.parseDouble(textField.getText()));
+                textArea.setText("cube volume = " + String.valueOf(cube.getVolume()));
             }
-
         });
 
         buttonBack.setOnAction(new EventHandler<ActionEvent>() {
                                    @Override
                                    public void handle(ActionEvent event) {
-
                                        CalcFigureMainFX calcFigureMainFX = new CalcFigureMainFX();
                                        Stage stageWindowMain = new Stage();
                                        try {
@@ -141,20 +96,15 @@ public class WindowBox extends Application {
                                        } catch (Exception e) {
                                            e.printStackTrace();
                                        }
-
                                    }
-
                                }
 
         );
 
 
-
-        // create Scene and setting
-        Scene scene = new Scene(gridPane, 300, 190);
+        Scene scene = new Scene(gridPane, 300, 110);
         stage.setScene(scene);
         stage.show();
 
     }
-
 }
