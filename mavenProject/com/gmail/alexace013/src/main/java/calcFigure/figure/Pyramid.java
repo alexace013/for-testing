@@ -9,16 +9,18 @@ public class Pyramid extends Box {
         super(0.0d);
     }
 
-    public Pyramid(double height, double sideA, double sideB) {
+    public Pyramid(double height, double square) {
         super(height);
-        setWidth(sideA);
-        setDepth(sideB);
+        setSquare(square);
+    }
+
+    public void setSquare(double square) {
+        setWidth(square);
     }
 
     @Override
     public double getSquare() {
-        double result = getWidth() * getDepth();
-        return result;
+        return getWidth();
     }
 
     @Override

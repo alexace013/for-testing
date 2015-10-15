@@ -1,7 +1,7 @@
 package calcFigure.window;
 
 import calcFigure.CalcFigureMainFX;
-import calcFigure.figure.Box;
+import calcFigure.figure.Cylinder;
 import calcFigure.inputNumber.InputConstrains;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -22,16 +22,16 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * Created by alexander on 08.10.15.
+ * Created by alexander on 15.10.15.
  */
-public class WindowBox extends Application {
+public class WindowCylinder extends Application {
 
-    private Box box = new Box();
+    private Cylinder cylinder = new Cylinder();
 
     @Override
     public void start(Stage stage) throws Exception {
 
-        stage.setTitle("Box");
+        stage.setTitle("Cylinder");
 
         // create GridPane
         GridPane gridPane = new GridPane();
@@ -40,26 +40,32 @@ public class WindowBox extends Application {
         gridPane.setVgap(10.0d);
         gridPane.setPadding(new Insets(10.0d, 10.0d, 10.0d, 10.0d));
 
-        // create Text - text height
-        Text textHeight = new Text("enter box height: ");
+        // create Text - diameter
+        Text textDiameter = new Text("enter cylinder diameter: ");
+        textDiameter.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
+        gridPane.add(textDiameter, 0, 0);
+
+        // create Text - height
+        Text textHeight = new Text("enter cylinder height: ");
         textHeight.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
+        gridPane.add(textHeight, 0, 1);
 
-        // create Text - text width
-        Text textWidth = new Text("enter box width: ");
-        textWidth.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
+        // create Tooltip for textFieldDiameter
+        Tooltip tooltipDiameter = new Tooltip();
+        tooltipDiameter.setText("diameter (example: " + (int) (Math.random() * 100) + ")");
+        tooltipDiameter.setFont(Font.font("Arial", FontWeight.NORMAL, 10));
 
-        // create Text - text depth
-        Text textDepth = new Text("enter box depth: ");
-        textDepth.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
-
-        // add text elements in gridPane
-        gridPane.add(textHeight, 0, 0);
-        gridPane.add(textWidth, 0, 1);
-        gridPane.add(textDepth, 0, 2);
+        // create TextField - diameter
+        TextField textFieldDiameter = new TextField();
+        textFieldDiameter.setMaxSize(140, 20);
+        textFieldDiameter.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
+        textFieldDiameter.setTooltip(tooltipDiameter);
+        InputConstrains.numbersOnly(textFieldDiameter);
+        gridPane.add(textFieldDiameter, 1, 0);
 
         // create Tooltip for textFieldHeight
         Tooltip tooltipHeight = new Tooltip();
-        tooltipHeight.setText("height (example: " + (int)(Math.random() * 100) + ")");
+        tooltipHeight.setText("height (example: " + (int) (Math.random() * 100) + ")");
         tooltipHeight.setFont(Font.font("Arial", FontWeight.NORMAL, 10));
 
         // create TextField - height
@@ -68,35 +74,7 @@ public class WindowBox extends Application {
         textFieldHeight.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
         textFieldHeight.setTooltip(tooltipHeight);
         InputConstrains.numbersOnly(textFieldHeight);
-
-        // create Tooltip for textFieldWidth
-        Tooltip tooltipWidth = new Tooltip();
-        tooltipWidth.setText("width (example: " + (int) (Math.random() * 100) + ")");
-        tooltipWidth.setFont(Font.font("Arial", FontWeight.NORMAL, 10));
-
-        // create TextField - width
-        TextField textFieldWidth = new TextField();
-        textFieldWidth.setMaxSize(140, 20);
-        textFieldWidth.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
-        textFieldWidth.setTooltip(tooltipWidth);
-        InputConstrains.numbersOnly(textFieldWidth);
-
-        // create Tooltip for textFieldDepth
-        Tooltip tooltipDepth = new Tooltip();
-        tooltipDepth.setText("depth (example: " + (int) (Math.random() * 100) + ")");
-        tooltipDepth.setFont(Font.font("Arial", FontWeight.NORMAL, 10));
-        
-        // create TextField - depth
-        TextField textFieldDepth = new TextField();
-        textFieldDepth.setMaxSize(140, 20);
-        textDepth.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
-        textFieldDepth.setTooltip(tooltipDepth);
-        InputConstrains.numbersOnly(textFieldDepth);
-
-        //add textField elements in gridPane
-        gridPane.add(textFieldHeight, 1, 0);
-        gridPane.add(textFieldWidth, 1, 1);
-        gridPane.add(textFieldDepth, 1, 2);
+        gridPane.add(textFieldHeight, 1, 1);
 
         // create Tooltip for textArea
         Tooltip tooltipTextArea = new Tooltip();
@@ -106,18 +84,13 @@ public class WindowBox extends Application {
         // create TextArea
         TextArea textArea = new TextArea();
         textArea.setFont(Font.font("Arial", FontWeight.BOLD, 11));
-        /*
-        * sedEditable
-        * true = > editing possible
-        * false = > editing is not possible
-        * */
         textArea.setEditable(false);
         textArea.setBackground(Background.EMPTY);
         textArea.setMaxSize(220, 20);
         textArea.setTooltip(tooltipTextArea);
         gridPane.add(textArea, 1, 4);
 
-        // create HBox for accommodation buttons
+        // create HBox for buttons
         HBox hBox = new HBox(7.5d);
         hBox.setAlignment(Pos.CENTER);
 
@@ -146,32 +119,25 @@ public class WindowBox extends Application {
         // add buttons in hBox
         hBox.getChildren().add(buttonBack);
         hBox.getChildren().add(buttonCalc);
-
-        // add hBox in gridPane
         gridPane.add(hBox, 1, 3);
 
-        // actions that will be processed by pressing the button "CALCULATE"
+        // set action where buttonCalc clicked
         buttonCalc.setOnAction(new EventHandler<ActionEvent>() {
-
             @Override
             public void handle(ActionEvent event) {
-
-                if (textFieldHeight.getText().isEmpty() || textFieldWidth.getText().isEmpty() ||
-                        textFieldDepth.getText().isEmpty()) {
-                    textArea.setText("please, fill in height, width & depth.");
+                if (textFieldDiameter.getText().isEmpty() && textFieldHeight.getText().isEmpty()) {
+                    textArea.setText("please, fill in diameter & height.");
                 } else {
-                    box.setHeight(Double.parseDouble(textFieldHeight.getText()));
-                    box.setWidth(Double.parseDouble(textFieldWidth.getText()));
-                    box.setDepth(Double.parseDouble(textFieldDepth.getText()));
+                    cylinder.setHeight(Double.parseDouble(textFieldHeight.getText()));
+                    cylinder.setWidth(Double.parseDouble(textFieldDiameter.getText()));
                     // formatting value to display two decimal places
-                    String formatted = String.format("%.2f", box.getVolume());
-                    textArea.setText("box volume = " + formatted);
+                    String formatted = String.format("%.2f", cylinder.getVolume());
+                    textArea.setText("cylinder volume = " + formatted);
                 }
-
             }
-
         });
 
+        // set action where buttonBack clicked
         buttonBack.setOnAction(new EventHandler<ActionEvent>() {
                                    @Override
                                    public void handle(ActionEvent event) {
@@ -184,19 +150,15 @@ public class WindowBox extends Application {
                                        } catch (Exception e) {
                                            e.printStackTrace();
                                        }
-
                                    }
-
                                }
 
         );
 
-
-        // create Scene and setting
-        Scene scene = new Scene(gridPane, 350, 190);
+        // create Scene
+        Scene scene = new Scene(gridPane, 350, 160);
         stage.setScene(scene);
         stage.show();
 
     }
-
 }

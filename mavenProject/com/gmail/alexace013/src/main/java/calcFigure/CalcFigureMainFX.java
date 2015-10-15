@@ -1,7 +1,6 @@
 package calcFigure;
 
-import calcFigure.window.WindowBox;
-import calcFigure.window.WindowCube;
+import calcFigure.window.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
@@ -48,30 +48,63 @@ public class CalcFigureMainFX extends Application {
         HBox hBox2 = new HBox(7.5d);
         hBox2.setAlignment(Pos.CENTER);
 
+        /*
+        * create Tooltip - box
+        * tooltip - used to display hints
+        * */
+        Tooltip tooltipBox = new Tooltip();
+        tooltipBox.setText("volume calculation box");
+        tooltipBox.setFont(Font.font("Arial", FontWeight.NORMAL, 10));
+
         // create Button - box
         Button buttonBox = new Button("Box");
         buttonBox.setFont(Font.font("Arial", FontWeight.SEMI_BOLD, 11));
         buttonBox.setPrefSize(80, 20);
+        buttonBox.setTooltip(tooltipBox);
+
+        // create Tooltip - cube
+        Tooltip tooltipCube = new Tooltip();
+        tooltipCube.setText("volume calculation cube");
+        tooltipCube.setFont(Font.font("Arial", FontWeight.NORMAL, 10));
 
         // create Button - cube
         Button buttonCube = new Button("Cube");
         buttonCube.setFont(Font.font("Arial", FontWeight.SEMI_BOLD, 11));
         buttonCube.setPrefSize(80, 20);
+        buttonCube.setTooltip(tooltipCube);
+
+        // create Tooltip - circle
+        Tooltip tooltipCircle = new Tooltip();
+        tooltipCircle.setText("volume calculation circle");
+        tooltipCircle.setFont(Font.font("Arial", FontWeight.NORMAL, 10));
 
         // create Button - circle
         Button buttonCircle = new Button("Circle");
         buttonCircle.setFont(Font.font("Arial", FontWeight.SEMI_BOLD, 11));
         buttonCircle.setPrefSize(80, 20);
+        buttonCircle.setTooltip(tooltipCircle);
+
+        // create Tooltip - cylinder
+        Tooltip tooltipCylinder = new Tooltip();
+        tooltipCylinder.setText("volume calculation cylinder");
+        tooltipCylinder.setFont(Font.font("Arial", FontWeight.NORMAL, 10));
 
         // create Button - cylinder
         Button buttonCylinder = new Button("Cylinder");
         buttonCylinder.setFont(Font.font("Arial", FontWeight.SEMI_BOLD, 11));
         buttonCylinder.setPrefSize(80, 20);
+        buttonCylinder.setTooltip(tooltipCylinder);
+
+        // create Tooltip - pyramid
+        Tooltip tooltipPyramid = new Tooltip();
+        tooltipPyramid.setText("volume calculation pyramid");
+        tooltipPyramid.setFont(Font.font("Arial", FontWeight.NORMAL, 10));
 
         // create Button - pyramid
         Button buttonPyramid = new Button("Pyramid");
-        buttonPyramid.setFont(Font.font("Arial", FontWeight.SEMI_BOLD, 10));
+        buttonPyramid.setFont(Font.font("Arial", FontWeight.SEMI_BOLD, 11));
         buttonPyramid.setPrefSize(80, 20);
+        buttonPyramid.setTooltip(tooltipPyramid);
 
         // add buttons (box, cube & circle) in hBox
         hBox.getChildren().add(buttonBox);
@@ -104,6 +137,7 @@ public class CalcFigureMainFX extends Application {
 
         );
 
+        // action that will be processed by pressing the button "CUBE"
         buttonCube.setOnAction(new EventHandler<ActionEvent>() {
                                    @Override
                                    public void handle(ActionEvent event) {
@@ -122,11 +156,68 @@ public class CalcFigureMainFX extends Application {
 
         );
 
-        // create Scene and setting
-        Scene scene = new Scene(gridPane, 300, 125);
-        stage.setScene(scene);
-        stage.show();
+        // action that will be processed by pressing the button "CIRCLE"
+        buttonCircle.setOnAction(new EventHandler<ActionEvent>() {
+                                     @Override
+                                     public void handle(ActionEvent event) {
+                                         // create window for circle
+                                         WindowCircle windowCircle = new WindowCircle();
+                                         Stage stageCircle = new Stage();
+                                         try {
+                                             windowCircle.start(stageCircle);
+                                         } catch (Exception e) {
+                                             e.printStackTrace();
+                                         } finally {
+                                             stage.close();
+                                         }
+                                     }
+                                 }
+
+        );
+
+        // action that will be processed by pressing the button "CYLINDER"
+        buttonCylinder.setOnAction(new EventHandler<ActionEvent>() {
+                                       @Override
+                                       public void handle(ActionEvent event) {
+                                           // create window for cylinder
+                                           WindowCylinder windowCylinder = new WindowCylinder();
+                                           Stage stageCylinder = new Stage();
+                                           try {
+                                               windowCylinder.start(stageCylinder);
+                                           } catch (Exception e) {
+                                               e.printStackTrace();
+                                           } finally {
+                                               stage.close();
+                                           }
+                                       }
+                                   }
+
+        );
+
+        // action that will be processed by pressing the button "PYRAMID"
+        buttonPyramid.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                // create window for pyramid
+                WindowPyramid windowPyramid = new WindowPyramid();
+                Stage stagePyramid = new Stage();
+                try {
+                    windowPyramid.start(stagePyramid);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    stage.close();
+                }
+                }
+            }
+
+            );
+
+            // create Scene and setting
+            Scene scene = new Scene(gridPane, 300, 125);
+            stage.setScene(scene);
+            stage.show();
 
 
+        }
     }
-}

@@ -15,7 +15,7 @@ public class CalcFigureMainConsole {
         Circle circle = new Circle(14);
         Cube cube = new Cube(25);
         Cylinder cylinder = new Cylinder(9, 4);
-        Pyramid pyramid = new Pyramid(14, 7, 5);
+        Pyramid pyramid = new Pyramid(14, 70);
         pyramid.getSquare();
 
         System.out.println("circle volume: " + circle.getVolume());

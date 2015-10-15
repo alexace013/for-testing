@@ -21,6 +21,7 @@ public class Box implements FigureParam {
         this.height = this.width = this.depth = value;
     }
 
+
     public Box(double height, double width) {
         this.height = height;
         this.width = width;

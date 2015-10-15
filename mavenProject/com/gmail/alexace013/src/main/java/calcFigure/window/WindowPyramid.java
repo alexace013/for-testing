@@ -1,7 +1,7 @@
 package calcFigure.window;
 
 import calcFigure.CalcFigureMainFX;
-import calcFigure.figure.Box;
+import calcFigure.figure.Pyramid;
 import calcFigure.inputNumber.InputConstrains;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -22,16 +22,16 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * Created by alexander on 08.10.15.
+ * Created by alexander on 15.10.15.
  */
-public class WindowBox extends Application {
+public class WindowPyramid extends Application {
 
-    private Box box = new Box();
+    private Pyramid pyramid = new Pyramid();
 
     @Override
     public void start(Stage stage) throws Exception {
 
-        stage.setTitle("Box");
+        stage.setTitle("Pyramid");
 
         // create GridPane
         GridPane gridPane = new GridPane();
@@ -41,25 +41,20 @@ public class WindowBox extends Application {
         gridPane.setPadding(new Insets(10.0d, 10.0d, 10.0d, 10.0d));
 
         // create Text - text height
-        Text textHeight = new Text("enter box height: ");
+        Text textHeight = new Text("enter pyramid height: ");
         textHeight.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
 
-        // create Text - text width
-        Text textWidth = new Text("enter box width: ");
-        textWidth.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
-
-        // create Text - text depth
-        Text textDepth = new Text("enter box depth: ");
-        textDepth.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
+        // create Text - text square
+        Text textSquare = new Text("enter pyramid square: ");
+        textSquare.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
 
         // add text elements in gridPane
         gridPane.add(textHeight, 0, 0);
-        gridPane.add(textWidth, 0, 1);
-        gridPane.add(textDepth, 0, 2);
+        gridPane.add(textSquare, 0, 1);
 
         // create Tooltip for textFieldHeight
         Tooltip tooltipHeight = new Tooltip();
-        tooltipHeight.setText("height (example: " + (int)(Math.random() * 100) + ")");
+        tooltipHeight.setText("height (example: " + (int) (Math.random() * 100) + ")");
         tooltipHeight.setFont(Font.font("Arial", FontWeight.NORMAL, 10));
 
         // create TextField - height
@@ -69,34 +64,21 @@ public class WindowBox extends Application {
         textFieldHeight.setTooltip(tooltipHeight);
         InputConstrains.numbersOnly(textFieldHeight);
 
-        // create Tooltip for textFieldWidth
+        // create Tooltip for textFieldSquare
         Tooltip tooltipWidth = new Tooltip();
-        tooltipWidth.setText("width (example: " + (int) (Math.random() * 100) + ")");
+        tooltipWidth.setText("square (example: " + (int) (Math.random() * 100) + ")");
         tooltipWidth.setFont(Font.font("Arial", FontWeight.NORMAL, 10));
 
-        // create TextField - width
-        TextField textFieldWidth = new TextField();
-        textFieldWidth.setMaxSize(140, 20);
-        textFieldWidth.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
-        textFieldWidth.setTooltip(tooltipWidth);
-        InputConstrains.numbersOnly(textFieldWidth);
-
-        // create Tooltip for textFieldDepth
-        Tooltip tooltipDepth = new Tooltip();
-        tooltipDepth.setText("depth (example: " + (int) (Math.random() * 100) + ")");
-        tooltipDepth.setFont(Font.font("Arial", FontWeight.NORMAL, 10));
-        
-        // create TextField - depth
-        TextField textFieldDepth = new TextField();
-        textFieldDepth.setMaxSize(140, 20);
-        textDepth.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
-        textFieldDepth.setTooltip(tooltipDepth);
-        InputConstrains.numbersOnly(textFieldDepth);
+        // create TextField - square
+        TextField textFieldSquare = new TextField();
+        textFieldSquare.setMaxSize(140, 20);
+        textFieldSquare.setFont(Font.font("Arial", FontWeight.NORMAL, 11));
+        textFieldSquare.setTooltip(tooltipWidth);
+        InputConstrains.numbersOnly(textFieldSquare);
 
         //add textField elements in gridPane
         gridPane.add(textFieldHeight, 1, 0);
-        gridPane.add(textFieldWidth, 1, 1);
-        gridPane.add(textFieldDepth, 1, 2);
+        gridPane.add(textFieldSquare, 1, 1);
 
         // create Tooltip for textArea
         Tooltip tooltipTextArea = new Tooltip();
@@ -106,11 +88,6 @@ public class WindowBox extends Application {
         // create TextArea
         TextArea textArea = new TextArea();
         textArea.setFont(Font.font("Arial", FontWeight.BOLD, 11));
-        /*
-        * sedEditable
-        * true = > editing possible
-        * false = > editing is not possible
-        * */
         textArea.setEditable(false);
         textArea.setBackground(Background.EMPTY);
         textArea.setMaxSize(220, 20);
@@ -150,26 +127,19 @@ public class WindowBox extends Application {
         // add hBox in gridPane
         gridPane.add(hBox, 1, 3);
 
-        // actions that will be processed by pressing the button "CALCULATE"
         buttonCalc.setOnAction(new EventHandler<ActionEvent>() {
-
             @Override
             public void handle(ActionEvent event) {
-
-                if (textFieldHeight.getText().isEmpty() || textFieldWidth.getText().isEmpty() ||
-                        textFieldDepth.getText().isEmpty()) {
-                    textArea.setText("please, fill in height, width & depth.");
+                if (textFieldHeight.getText().isEmpty() && textFieldSquare.getText().isEmpty()) {
+                    textArea.setText("please, fill in height & square.");
                 } else {
-                    box.setHeight(Double.parseDouble(textFieldHeight.getText()));
-                    box.setWidth(Double.parseDouble(textFieldWidth.getText()));
-                    box.setDepth(Double.parseDouble(textFieldDepth.getText()));
+                    pyramid.setHeight(Double.parseDouble(textFieldHeight.getText()));
+                    pyramid.setWidth(Double.parseDouble(textFieldSquare.getText()));
                     // formatting value to display two decimal places
-                    String formatted = String.format("%.2f", box.getVolume());
-                    textArea.setText("box volume = " + formatted);
+                    String formatted = String.format("%.2f", pyramid.getVolume());
+                    textArea.setText("pyramid volume = " + formatted);
                 }
-
             }
-
         });
 
         buttonBack.setOnAction(new EventHandler<ActionEvent>() {
@@ -193,10 +163,9 @@ public class WindowBox extends Application {
 
 
         // create Scene and setting
-        Scene scene = new Scene(gridPane, 350, 190);
+        Scene scene = new Scene(gridPane, 350, 160);
         stage.setScene(scene);
         stage.show();
 
     }
-
 }
