@@ -115,7 +115,7 @@ public class WindowCircle extends Application {
                     circle.setHeight(Double.parseDouble(textField.getText()));
                     // formatting value to display two decimal places
                     String formatted = String.format("%.2f", circle.getVolume());
-                    textArea.setText("cube volume = " + formatted);
+                    textArea.setText("circle volume = " + formatted);
                 }
             }
         });
