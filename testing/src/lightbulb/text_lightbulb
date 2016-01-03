@@ -1,0 +1,57 @@
+Какой паттерн проектирования реализован в данном коде ?
+
+public class LightBulb
+{
+    private IState state;
+
+    public LightBulb(IState state)
+    {
+        this.state = state;
+    }
+
+    public void setState(IState state)
+    {
+        this.state = state;
+    }
+
+    public boolean isEnabled()
+    {
+        return state instanceof On;
+    }
+
+    public float getCP()
+    {
+        return state.getCP();
+    }
+}
+
+public interface IState
+{
+    float getCP();
+}
+
+public class On implements IState
+{
+    @Override
+    public float getCP()
+    {
+        return 100f;
+    }
+}
+
+public class Off implements IState
+{
+    @Override
+    public float getCP()
+    {
+        return 0;
+    }
+}
+
+
+ Состояние +
+ Билдер
+ Фасад
+ Защитник
+
+ Пояснение: Состояние - у нас есть лампочка и её поведение меняется в зависимости от того в каком состоянии она находится.
